@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Interactive rating component</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Overpass&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-guide.css">
+</head>
+
+<body>
+  <main>
+
+    <div class="evaluation">
+      <img src="images/icon-star.svg" class="star" alt="star">
+      <h1 class="heading">How did we do?</h1>
+      <p class="paragraph">Please let us know how we did with your support request. All feedback is appreciated
+        to help us improve our offering!</p>
+      <div class="numbers">
+        <div class="circle">
+          1
+        </div>
+        <div class="circle">
+          2 </div>
+        <div class="circle">
+          3 </div>
+        <div class="circle">
+          4 </div>
+        <div class="circle">
+          5 </div>
+      </div>
+      <button class="btn" type="submit">Submit</button>
+    </div>
+
+    <div class="thankyou">
+      <img class="thankYouImage" src="images/illustration-thank-you.svg" alt="thankyou">
+      <span class="msg">
+        <p>You selected <span id="rating"></span> out of 5 </p>
+      </span>
+      <h1 class="heading">Thank you!</h1>
+      <p class="paragraph"> We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!</p>
+    </div>
+
+  </main>
+  <script src="js.js"></script>
+</body>
+
+</html>
