@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        background-color: #321e1e;
+      }
+
+      .container {
+          height: 748px;
+          width: 450px;
+        border-radius: 1rem;
+        overflow: hidden;
+        background-color: #343431;
+        display: grid;
+        gap: 0.35rem;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+      }
+
+      .box {
+        background-color: #E8FFCE;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+      }
+
+      .boxdif {
+        background-color: #ffeecc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0.5rem;
+        background-color:#8CABFF ;
+      }
+      .box:hover,
+      .boxdif:hover {
+        scale: 1.02;
+        filter: drop-shadow(1px 1px 15px black);
+      }
+      .operator{
+        background-color: chartreuse;
+      }
+      .item1 {
+        grid-area: 1/1/3/-1;
+        background-color: #EEE2DE;
+        display: flex;
+        justify-content: end;
+        align-items: end;
+        overflow: hidden;
+      }
+      .item1 > strong {
+        font-size: 3rem;
+      }
+      .item20{
+        grid-area: 7/1/8/3;
+      }
+      strong {
+        font-size: 4rem;
+      }
+      img {
+        height: 3rem;
+        filter: hue-rotate(180deg);
+      }
+
+      @media(max-width:450px)
+      {   strong {
+        font-size: 3rem;
+      }
+      .item1 > strong {
+        font-size: 2.5rem;
+      }
+        .container {
+          height: 480px;
+          width: 290px;}
+
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="item1">
+        <strong id="display"></strong>
+      </div>
+      <div class="boxdif clear item2">
+        <strong>C</strong>
+      </div>
+      <div class="boxdif cancel item3">
+        <strong><img src="cancel.png" alt /></strong>
+      </div>
+      <div class="boxdif item4">
+        <strong>M</strong>
+      </div>
+      <div class="box operator item5">
+        <strong>/</strong>
+      </div>
+      <div class="box item6">
+        <strong>7</strong>
+      </div>
+      <div class="box item7">
+        <strong>8</strong>
+      </div>
+      <div class="box item8">
+        <strong>9</strong>
+      </div>
+      <div class="box operator item9">
+        <strong>x</strong>
+      </div>
+      <div class="box item10">
+        <strong>4</strong>
+      </div>
+      <div class="box item11">
+        <strong>5</strong>
+      </div>
+      <div class="box item12">
+        <strong>6</strong>
+      </div>
+      <div class="box operator item13">
+        <strong>-</strong>
+      </div>
+      <div class="box item14">
+        <strong>1</strong>
+      </div>
+      <div class="box item15">
+        <strong>2</strong>
+      </div>
+      <div class="box item16">
+        <strong>3</strong>
+      </div>
+      <div class="box operator item17">
+        <strong>+</strong>
+      </div>
+      <div class="box item20">
+        <strong>0</strong>
+      </div>
+      <div class="box item21">
+        <strong>.</strong>
+      </div>
+      <div class="box operator submit item21">
+        <strong>=</strong>
+      </div>
+    </div>
+
+    <script>
+      let str = "";
+      const boxes = document.getElementsByClassName("box")
+
+      function setValue(newstr) {
+        if( newstr === 'M')
+        newstr = "%"
+        else if( newstr === 'x')
+        newstr = "*"
+          str = str + newstr;
+          document.querySelector("#display").innerHTML = str;
+      }
+      function cancel()
+      {
+        str = str.substring(0, str.length - 1)
+          document.querySelector("#display").innerHTML = str;
+      }
+
+      function performed(){
+      try {
+              str = eval(str).toFixed(2);
+          }
+          catch (err) {
+              alert("Entered invalid Operation")
+          }
+          document.querySelector("#display").innerHTML = str;
+
+        }
+      for (let i = 0; i < boxes.length; i++) {
+          boxes[i].onclick = (e) => {
+              let newstr = boxes[i].querySelector("strong").innerHTML;
+              setValue(newstr)
+          }
+      }
+      document.addEventListener("keydown", e => {
+          switch (e.key)
+          {
+              case "1":
+          setValue("1");
+          break;
+              case "2":
+          setValue("2");
+          break; case "3":
+          setValue("3");
+          break; case "4":
+          setValue("4");
+          break; case "5":
+          setValue("5");
+          break; case "6":
+          setValue("6");
+          break; case "7":
+          setValue("7");
+          break; case "8":
+          setValue("8");
+          break; case "9":
+          setValue("9");
+          break;
+          case ".":
+          setValue(".");
+          break;
+          case "0":
+          setValue("0");
+          break; case "%":
+          setValue("%");
+          break; case "/":
+          setValue("/");
+          break; case "*":
+          setValue("*");
+          break; case "-":
+          setValue("-")
+          break; case "+":
+          setValue("+");
+          break;
+          case "Enter":
+          performed();
+          break;
+          case "Backspace":
+          cancel()
+          break;
+          case "Delete":
+          cancel()
+          break;
+         
+      }
+      })
+      document.querySelector(".submit").onclick = () => {
+        performed();
+      }
+      document.querySelector(".cancel").onclick = () => {
+        cancel()
+      }
+      document.querySelector(".clear").onclick = () => {
+          str = ''
+          document.querySelector("#display").innerHTML = str;
+      }
+      document.querySelector(".reload").onclick = () => {
+          window.location.reload();
+      }
+    </script>
+  </body>
+</html>
