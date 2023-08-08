@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        background: linear-gradient(300deg, #0d2832, #3d0b13, #320903);
+        background-size: 180% 180%;
+        animation: gradient-animation 18s ease infinite;
+      }
+
+      @keyframes gradient-animation {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .container {
+        height: 380px;
+        width: 380px;
+        border-radius: 1rem;
+        overflow: hidden;
+        display: grid;
+        grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+        gap: 0.8rem;
+        background-color: cornflowerblue;
+      }
+
+      p {
+        display: none;
+      }
+
+      strong {
+        display: flex;
+        justify-content: center;
+        font-size: 5rem;
+        align-items: center;
+        height: 100%;
+        color: antiquewhite;
+      }
+
+      .item {
+        background: linear-gradient(300deg, #0d2832, #3d0b13, #320903);
+        transition: all ease cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .item:hover {
+        scale: 1.1;
+        border-radius: 1rem;
+      }
+      h2 {
+        filter: drop-shadow(5px 5px 5px black);
+        background: linear-gradient(300deg, #578495, #be2740, #c73e28);
+        padding: 0.2rem;
+        border-radius: 0.4rem;
+        overflow: hidden;
+        /* display: none; */
+        text-align: center;
+        color: wheat;
+      }
+      h2:hover {
+        scale: 1.1;
+        background: linear-gradient(300deg, #33ec30, #a80808, #eb2525e8);
+        color: white;
+      }
+      h1 {
+        font-size: 2.5rem;
+        filter: drop-shadow(1px 1px 2px yellow);
+        background-color: rgb(238, 201, 216);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      @media (max-width: 500px) {
+        .container {
+          height: 280px;
+          width: 280px;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h2>Reset Game</h2>
+      <h1>Player 1 to move</h1>
+    </div>
+    <div class="container">
+      <div class="item">
+        <p>1</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>2</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>3</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>4</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>5</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>6</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>7</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>8</p>
+        <strong></strong>
+      </div>
+      <div class="item">
+        <p>9</p>
+        <strong></strong>
+      </div>
+    </div>
+    <script>
+      let count = 0,
+        str1 = "",
+        str2 = "",
+        won = false,
+        cases = ["123", "456", "789", "147", "258", "369", "159", "357"];
+      let box = document.querySelectorAll(".item");
+      let reset_btn = document.querySelector("h2");
+      let result_show = document.querySelector("h1");
+
+      for (let i = 0; i < box.length; i++) {
+        box[i].addEventListener("click", function add_event() {
+          count++;
+          let val = box[i].querySelector("p").innerHTML;
+
+          if (count % 2 !== 0) {
+            box[i].querySelector("strong").innerHTML = "X";
+            str1 += val;
+            checkScore(str1, 1);
+            if (!won) {
+              result_show.innerHTML = "Player O to move";
+            }
+          } else {
+            box[i].querySelector("strong").innerHTML = "O";
+            str2 += val;
+            checkScore(str2, 2);
+            if (!won) {
+              result_show.innerHTML = "Player X to move";
+            }
+          }
+          if (count == 9) {
+            result("Game draw!");
+          }
+          box[i].removeEventListener("click", add_event);
+        });
+      }
+
+      function checkScore(str, playerNum) {
+        for (let j = 0; j < cases.length; j++) {
+          let re = RegExp(`[${cases[j]}]`, "g");
+          if (str.match(re) !== null && str.length >= 3) {
+            if (
+              cases[j] ==
+              str
+                .match(re)
+                .sort((a, b) => a - b)
+                .join("")
+            ) {
+              if (count == 9) count = 8;
+              won = true;
+              result(playerNum + " Won the Game! 🫣");
+            }
+          }
+        }
+      }
+      function result(str) {
+        console.log(str);
+        reset_btn.style.display = "block";
+        reset_btn.onclick = () => {
+          location.reload();
+        };
+        result_show.innerHTML = str;
+        if (won) {
+          console.log(box);
+          for (let j = 0; j < box.length; j++) {
+            box[j].removeEventListener("click", add_event);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
