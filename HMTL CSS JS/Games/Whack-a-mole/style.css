@@ -1,0 +1,49 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: bisque;
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+    gap: 0.2rem 0.3rem;
+    background-color: rgb(108, 92, 255);
+}
+
+.square {
+    width: 200px;
+    height: 200px;
+    background-color: darkseagreen;
+    border-radius: 0.6rem;
+}
+
+.mole {
+    background-image: url("./mole.png");
+    object-fit: cover;
+    z-index: 1;
+    overflow: hidden;
+    transition: ease-in-out 200ms;
+}
+
+.mole:hover {
+    scale: 1.04;
+}
+
+img {
+    height: 400px;
+    width: 300px;
+}
+
+.restart {
+    background-color: blue;
+    padding: 0 0.4rem;
+    border-radius: 0.6rem;
+}
+
+.restart:hover {
+    scale: 1.04
+}
