@@ -57,9 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       img: "images/pizza.png",
     },
   ];
-
   CardArray.sort(() => Math.random() - 0.5);
-
   function createBoard() {
     for (let i = 0; i < CardArray.length; i++) {
       var card = document.createElement("img");
@@ -67,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.setAttribute("src", "images/blank.png");
       card.setAttribute("data-id", i);
       card.addEventListener("click", flipCard);
+      card
       container.appendChild(card);
     }
   }
