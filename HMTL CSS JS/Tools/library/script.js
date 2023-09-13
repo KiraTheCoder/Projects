@@ -1,9 +1,12 @@
+import { bookData } from "./Books.js";
 const bookForm = document.getElementById("book-form");
 const title = document.getElementById("title");
 const author = document.getElementById("author");
-const bookId = document.getElementById("bookid");
-const list = document.querySelector("#book-list");
-const alert = document.querySelector("#alert");
+const bookId = document.getElementById("book-id");
+const list = document.getElementById("book-list");
+const alert = document.getElementById("alert");
+const clearBtn = document.getElementById("clear-all");
+const SortBook = document.getElementById("sort-option");
 
 class Book {
   constructor(title, author, ISBN) {
@@ -14,38 +17,70 @@ class Book {
 }
 
 class Library {
-  constructor(type) {
-    this.type = type;
-    this.books = [];
-  }
-
+  static books = [];
   static getBooks() {
     if (
       localStorage.getItem("books") === null ||
       localStorage.getItem("books") === undefined
     ) {
-      this.books = [];
+      {
+        this.books = bookData;
+        localStorage.setItem("books", JSON.stringify(this.books));
+      }
     } else {
       this.books = JSON.parse(localStorage.getItem("books"));
-      // this.books.forEach(book => {
-
-      // })
     }
     return this.books;
   }
-  addBook(book) {
+  static addBook(book) {
     this.books.push(book);
+
     localStorage.setItem("books", JSON.stringify(this.books));
   }
 
-  removeBook(ISBN) {
+  static removeBook(ISBN) {
     this.books = this.books.filter((book) => book.ISBN !== ISBN);
     localStorage.setItem("books", JSON.stringify(this.books));
   }
+  static removeAllBooks() {
+    this.books = [];
+    localStorage.setItem("books", JSON.stringify(this.books));
+  }
+  static sort(headName) {
+    switch (headName) {
+      case "title":
+        this.books.sort((a, b) => {
+          if (a.title > b.title)
+            return 1
+          else if (a.title < b.title)
+            return -1
+          else return 0
+        })
+        break;
+      case "author":
+        this.books.sort((a, b) => {
+          if (a.author > b.author)
+            return 1
+          else if (a.author < b.author)
+            return -1
+          else return 0
+        })
+        break;
+      case "bookId":
+        this.books.sort((a, b) => {
+          if (a.ISBN > b.ISBN)
+            return 1
+          else if (a.ISBN < b.ISBN)
+            return -1
+          else return 0
+        })
+        break;
+    }
+    localStorage.setItem("books", JSON.stringify(this.books));
+  }
 }
-const library1 = new Library("ok");
-//  DOM manipulation
 
+//  DOM manipulation
 class DomManipulator {
   static showAlert(message, className) {
     {
@@ -68,19 +103,20 @@ class DomManipulator {
       if (title.value === "" || author.value === "" || bookISBN === "") {
         throw Error("Please fill in all fields");
       } else {
-        // True if Found character other than [0-9] number
+        // True if  character Found other than [0-9] number
         if (bookISBN.match(/\D/g)) throw Error("Book id must me numeric value");
-        if (bookISBN.length < 10)
-          throw Error("ISBN number must be greater than 10 digit");
-        //  Logic for if book already added
+        if (bookISBN.length < 13)
+          throw Error("ISBN number must be greater than 13 digit");
+        //  check book already added or not
         const books = Library.getBooks();
+
         books.forEach((book) => {
           if (book.ISBN == bookISBN) throw Error("Book ID already registered");
         });
 
         // add to Object
         const book = new Book(title.value, author.value, bookISBN);
-        library1.addBook(book);
+        Library.addBook(book);
         // add book to DOM
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -96,19 +132,21 @@ class DomManipulator {
         bookId.value = "";
       }
     } catch (e) {
-      DomManipulator.showAlert(e.message, "bg-info");
+      DomManipulator.showAlert(e, "bg-info");
     }
   }
 
   static removeBook(e) {
     if (e.target.classList.contains("btn-close")) {
-      library1.removeBook(e.target.getAttribute("id"));
+      Library.removeBook(e.target.getAttribute("id"));
       e.target.parentElement.parentElement.remove();
     }
   }
 
+
   static main() {
     const books = Library.getBooks();
+    list.innerHTML = "";
     books.forEach((book) => {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -120,7 +158,19 @@ class DomManipulator {
       list.appendChild(row);
     });
   }
+
+  static removeAllBooks() {
+    list.innerHTML = "";
+    Library.removeAllBooks();
+  }
+  static sort(e) {
+    console.log(e.target.value);
+    Library.sort(e.target.value)
+    DomManipulator.main()
+  }
 }
 bookForm.addEventListener("submit", DomManipulator.addBook);
 list.addEventListener("click", DomManipulator.removeBook);
+clearBtn.addEventListener("click", DomManipulator.removeAllBooks);
+SortBook.addEventListener("click", DomManipulator.sort);
 document.addEventListener("DOMContentLoaded", DomManipulator.main);

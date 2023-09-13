@@ -14,14 +14,12 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand p-1" href="#">
-        <img class="mx-2" src="./assets/book.png" height="28" alt="" />Library</a>
-    </div>
-    </div>
-  </nav>
 
+
+  <!-- alert -->
+  <dir class="container text-center ">
+    <div id="alert" class="alert py-0 "></div>
+  </dir>
 
   <div class="container mt-2">
     <h1 class="display-4 text-center">
@@ -30,10 +28,6 @@
       </div>
       <i class="text-primary"></i><b><span class="text-primary">Book </span>List</b>
     </h1>
-    <!-- alert -->
-    <dir class="container">
-      <div id="alert" class="alert"></div>
-    </dir>
     <!-- form -->
     <form id="book-form">
       <div class="form-group mt-2">
@@ -45,18 +39,32 @@
         <input type="text" id="author" class="form-control mt-2" placeholder="Enter author name" />
       </div>
       <div class="form-group mt-2">
-        <label for="bookid"><b>Book ID</b></label>
-        <input type="text" id="bookid" class="form-control mt-2" placeholder="Enter book ISBN ID" />
+        <label for="book-id"><b>Book ID</b></label>
+        <input type="text" id="book-id" class="form-control mt-2" placeholder="Enter book ISBN ID" />
       </div>
       <input type="submit" value="Add Book" class="btn btn-primary btn-block mt-3" />
     </form>
-    <table class="table table-striped mt-5">
+    <div class="container mt-5 bg-light d-flex justify-content-between">
+      <div>
+        <label class="me-2"><b>Sort Books:</b> </label>
+        <select name="Sort" id="sort-option">
+          <option value="none">none</option>
+          <option value="title">By Title</option>
+          <option value="author">By Author</option>
+          <option value="bookId">By Book ID</option>
+        </select>
+      </div>
+      <button id="clear-all" class="btn-sm btn-outline-danger"><b>Sort Books:</b> </button>
+
+    </div>
+    <table class="table table-striped mt-2">
       <thead>
         <tr>
           <th>Title</th>
           <th>Author</th>
           <th>Book ID</th>
           <th></th>
+
         </tr>
       </thead>
       <tbody id="book-list"></tbody>
