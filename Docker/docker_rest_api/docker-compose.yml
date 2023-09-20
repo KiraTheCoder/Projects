@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+ db:
+  image: mongo:latest
+  restart: always
+  environment:
+   MONGO_INITDB_ROOT_USERNAME: root
+   MONGO_INITDB_ROOT_PASSWORD: example
+  ports:
+   - 27017:27017
+  volumes:
+   - mongo-data:/data/db
+
+ app:
+  build: .
+  restart: always
+  ports:
+   - "5000:5000"
+  depends_on:
+   - db
+volumes:
+ mongo-data:
+
+
+#  db - This represents the MongoDB container where we defined the database login credentials, paired with a port mapped to 27017.
+
+# app - This represents the Node.js container built from our previously defined Dockerfile with a port mapping of 5000. Also, the app service will only start after the db using the depends_on flag.
