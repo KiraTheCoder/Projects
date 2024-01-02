@@ -1,0 +1,728 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Jaldi&family=Jockey+One&family=Montserrat:wght@300;400;700;900&family=Oswald:wght@400;600;700&family=PT+Sans:wght@400;700&family=Poppins:wght@400;500;700;900&family=Roboto+Flex:wght@400;500;700;900&family=Roboto:wght@400;700;900&display=swap');
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: 'Jaldi', sans-serif;
+}
+
+html {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: normal;
+  color: black;
+
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/*Scrollbar start  */
+/* width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  display: none;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5rem;
+  height: 2rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7C7777;
+  border-radius: 10px;
+  height: 2rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b48787;
+}
+
+#scrollToTopButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Scrollbar end */
+
+.flex {
+  display: flex;
+}
+
+.scale {
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s;
+}
+
+.scale:hover {
+  transform: scale(1.08);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+}
+
+span {
+  white-space: nowrap;
+}
+
+.search-icon-for-mobile {
+  display: none;
+}
+
+
+/* Main Container */
+/* ==================================================== */
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 0.7fr 7.5fr;
+  grid-template-rows: 3rem;
+  /* grid-auto-rows: auto;  --> by default pros */
+  gap: 0.2rem;
+}
+
+/* take whole first row */
+.header {
+  background-color: #FFFF;
+  grid-area: 1/1/2/7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* take second row's first column */
+.navbar {
+  background-color: #FFFF;
+  margin: 0;
+  padding: 0;
+  padding-left: 1rem;
+  overflow-y: scroll;
+  width: 8rem;
+}
+
+/* take second row's second column */
+.content {
+  display: grid;
+  grid-template-rows: 3rem auto auto;
+  gap: 0.2rem;
+  overflow: scroll;
+}
+
+
+
+/* NavBar */
+/* ==================================================== */
+
+.active-navbar {
+  background-color: aqua;
+}
+
+.nav-flex {
+  display: flex;
+  gap: 1rem;
+  border-radius: 0.35rem;
+}
+
+
+.nav-item1,
+.nav-item2 {
+  padding: 0.3rem 0;
+  margin: 0;
+}
+
+.nav-flex:hover {
+  cursor: pointer;
+  background-color: aqua;
+}
+
+.Subscriptions-text {
+  font-weight: 600;
+  font-size: 1.14rem;
+}
+
+.nav-logo {
+  height: 2rem;
+  border-radius: 100%;
+  margin: auto 0;
+
+}
+
+/* Header */
+/* ==================================================== */
+
+
+.header-flex {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.header-flex:hover {
+  cursor: pointer;
+}
+
+
+.header:first-child {
+  padding-left: 1rem;
+}
+
+.youtube-text {
+  padding: 0.5rem;
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bolder;
+}
+
+.youtube-logo {
+  padding: 0;
+  margin: auto;
+  height: 1.6rem;
+  font-family: 'Jockey One', sans-serif;
+}
+
+sup {
+  font-size: 0.5rem
+}
+
+.ham-burger {
+  padding-bottom: 0.2rem;
+}
+
+.ham-burger:hover {
+  transform: scale(1.07);
+}
+
+.youtube-container {
+  margin: 0;
+  padding: 0;
+  margin-left: 1rem;
+}
+
+
+.search-container {
+  border: 1px groove black;
+  height: 1.9rem;
+  width: 30rem;
+  padding: 0;
+  border-radius: 20rem;
+  position: relative;
+  overflow: hidden
+}
+
+.search-container:hover {
+  box-shadow: 3px 3px 5px #4f4545;
+}
+
+.search-input {
+  font-size: 1rem;
+  border: none;
+  position: absolute;
+  height: 100%;
+  width: 83%;
+  left: 5%;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+::placeholder {
+  font-size: 1rem;
+  color: rgba(20, 19, 19, 0.791);
+}
+
+.search-btn {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  height: 100%;
+  color: transparent;
+}
+
+.search-icon {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  padding: 0.3rem 0.9rem;
+  background-color: #B6C4B6;
+  height: 110%;
+}
+
+.search-mic {
+  height: 32px;
+  margin-left: 0.8rem;
+  padding: 0.3rem;
+  background-color: #B6C4B6;
+  border-radius: 50%;
+}
+
+
+.search-mic .profile-upload-container {
+  margin: 0.2rem 1rem 0 0;
+}
+
+.upload-icon,
+.notification-bell {
+  height: 1.7rem;
+  margin-right: 1rem;
+}
+
+.profile-pic {
+  height: 2rem;
+  border-radius: 100%;
+}
+
+
+/* category */
+/* ========================================== */
+.category-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow: scroll;
+  overflow-y: hidden;
+}
+
+.active-category {
+  background-color: rgb(109, 179, 179);
+}
+
+.category-text {
+  border-radius: 0.5rem;
+  background-color: rgba(228, 228, 228, 1);
+  padding: 0.2rem 0.6rem;
+  margin: 0.2rem 0.3rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.category-text:hover {
+  background-color: rgb(109, 179, 179);
+}
+
+/* Video Card */
+/* ============================================== */
+
+.video-card-container {
+  display: grid;
+  grid-template-columns: repeat(5, 18.5rem);
+  row-gap: 0.5rem;
+  justify-content: space-around;
+  align-content: space-evenly;
+  padding: 1rem;
+
+}
+
+
+.video-card {
+  width: 18rem;
+  border-radius: 0.5rem;
+}
+
+.video {
+  border-radius: 0.5rem;
+  width: 18rem;
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+}
+
+.channel-logo {
+  border-radius: 100%;
+  height: 2rem;
+  width: auto;
+  transition: cubic-bezier(0.215, 0.610, 0.355, 1) 0.2s;
+}
+
+
+.video-details {
+  padding: 0.01rem 0.4rem 0.3rem;
+  display: flex;
+  gap: 0.7rem;
+
+}
+
+
+.three-dot {
+  margin: 0.3rem 0.1rem auto 0.11rem;
+  height: 15px;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.01s;
+}
+
+.video:hover,
+.person-logo:hover,
+.three-dot:hover {
+  transform: scale(1.01);
+  box-shadow: 3px 3px 5px black;
+}
+
+
+.video-title {
+  font-size: 1rem;
+  margin: 0;
+  padding-bottom: 0.2rem;
+  width: 104%;
+  line-height: 1.4rem;
+}
+
+.video-description {
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.2rem;
+}
+
+
+@media (max-width:1300px) {
+
+  /* main container */
+  .container {
+    grid-template-columns: 0.1fr 7.5fr;
+  }
+
+  /* Header */
+  .ham-burger {
+    margin-left: 1rem;
+  }
+
+  .youtube-container {
+    margin: 0px 0px 0px 1.5rem;
+  }
+
+  /* Navbar  */
+  .navbar {
+    width: 5rem;
+  }
+
+  .nav-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .nav-item1 {
+    padding: 0.1rem 0 0 0.1rem;
+    height: 1.2rem;
+  }
+
+  .nav-item2 {
+    font-size: 0.8rem;
+  }
+
+
+  /* .navbar :not(:nth-child(-n+4)) { */
+  .navbar>:nth-child(n+5) {
+    display: none;
+    background-color: blank;
+  }
+
+  .search-container {
+    width: 20rem;
+  }
+
+  .content {
+    grid-template-rows: 3rem auto;
+  }
+}
+
+@media (min-width: 2200px) {
+
+  .video-card-container {
+    grid-template-columns: repeat(6, 18.5rem);
+  }
+}
+
+@media (min-width: 1401px) and (max-width:1800px) {
+
+  .video-card-container {
+    grid-template-columns: repeat(4, 18.5rem);
+  }
+}
+
+@media (min-width: 961px) and (max-width:1400px) {
+
+  .video-card-container {
+    grid-template-columns: repeat(3, 18.5rem);
+  }
+
+}
+
+@media (min-width: 800px) and (max-width:96px) {
+
+  .search-container {
+    width: 10rem;
+  }
+
+}
+
+@media (min-width: 651px) and (max-width:800px) {
+
+  .search-container {
+    width: 10rem;
+  }
+
+}
+
+@media (min-width: 651px) and (max-width:960px) {
+
+  .video-card-container {
+    grid-template-columns: repeat(2, 18.5rem);
+  }
+}
+
+/* For Mobile */
+/* ================================================================*/
+
+@media (max-width:651px) {
+
+  /* ================ Header  ================*/
+  .header-flex {
+    gap: 0;
+  }
+
+  .search-container {
+    display: none;
+  }
+
+  .search-container {
+    width: 8rem;
+    height: 1.5rem;
+  }
+
+  .ham-burger {
+    height: 1.1rem;
+  }
+
+  .youtube-logo {
+    height: 1.3rem;
+  }
+
+  .youtube-text {
+    font-size: 1.4rem;
+  }
+
+  .search-input {
+    display: none;
+  }
+
+  .search-icon-for-mobile {
+    display: block;
+    margin-left: 5.2rem;
+    border-radius: 50%;
+    padding: 0.5rem;
+    color: black;
+    font-weight: 500;
+  }
+
+  .search-mic {
+    height: 1.6rem;
+    margin-left: 0.3rem;
+  }
+
+  .upload-icon,
+  .notification-bell {
+    height: 1.5rem;
+    margin: 0.2rem;
+  }
+
+  .profile-pic {
+    height: 1.7rem;
+    margin-left: 0.5rem;
+  }
+
+
+
+  /* ================ Navbar  ================*/
+  .navbar {
+    width: 0;
+    height: 0;
+  }
+
+  .nav-flex {
+    width: 0;
+    display: none;
+  }
+
+  /* ================ category  ================*/
+  .category-text {
+    border-radius: 0.5rem;
+    padding: 0.1rem 0.4rem;
+  }
+
+  /* ================ Videos  ================*/
+  .video-card-container {
+    grid-template-columns: repeat(1, 25rem);
+    /* justify-content: center; */
+  }
+
+  .video-card,
+  .video {
+    width: 24rem;
+  }
+
+  .video-details {
+    position: relative;
+  }
+
+  .channel-logo {
+    height: 2.2rem;
+  }
+
+  .three-dot {
+    position: absolute;
+    right: 2%;
+    height: 1rem;
+  }
+
+  .video-title {
+    font-size: 1.23rem;
+  }
+}
+
+@media (max-width:524px) {
+  .header> :first-child {
+    margin-left: -1.2rem;
+  }
+
+
+  .header {
+    width: 100vw;
+  }
+
+  .header> :nth-child(1) {
+    flex-grow: 1;
+  }
+
+
+  .header> :nth-child(2) {
+    flex-grow: 1;
+  }
+
+
+  .header> :nth-child(3) {
+    flex-grow: 1;
+  }
+
+
+  .upload-icon,
+  .notification-bell {
+    display: none;
+  }
+
+  .ham-burger {
+    display: none;
+  }
+
+
+  .youtube-logo {
+    height: 1.5rem;
+    margin: 0;
+  }
+
+  .youtube-text {
+    display: none;
+  }
+
+
+
+  .ham-burger {
+    display: block;
+    height: 0.98rem;
+  }
+
+  .youtube-logo {
+    height: 1.4rem;
+    margin-left: -0.8rem;
+  }
+
+  .search-container {
+    width: 10rem;
+    height: 1.5rem;
+  }
+
+  .search-input {
+    display: block;
+  }
+
+  .profile-upload-container {
+    padding-right: 0;
+  }
+
+  .profile-upload-container {
+    margin-right: -4rem;
+  }
+}
+
+@media (max-width:480px) {
+  .header> :first-child {
+    margin-left: -1.2rem;
+  }
+
+  .content {
+    margin-left: -1.2rem;
+  }
+
+
+  .video-card {
+    width: 90vw;
+  }
+
+  .video {
+    width: 90vw;
+  }
+
+  .video-info {
+    width: 82%;
+  }
+
+  .channel-logo {
+    height: 1.7rem;
+  }
+
+
+  .video-details {
+    padding: 0.01rem 0.4rem 0.3rem;
+    display: flex;
+    gap: 0.7rem;
+  }
+
+  .video-title {
+    font-size: 1.1rem;
+  }
+
+  .video-description {
+    font-size: 0.9rem;
+  }
+
+  .three-dot {
+    margin: 0.3rem 0.1rem auto 0.11rem;
+    height: 15px;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.01s;
+  }
+
+  .profile-upload-container {
+    margin-right: -0.87rem;
+  }
+
+}

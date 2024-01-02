@@ -4,7 +4,7 @@ const SpeechRecognition =
 
 const rec = new SpeechRecognition();
 
-rec.lang = 'en-US';
+rec.lang = 'en-UK';
 rec.continuous = true;
 
 rec.onresult = function (e) {
@@ -24,6 +24,7 @@ rec.onresult = function (e) {
     for (let i = e.resultIndex; i < e.results.length; i++) {
         const script = e.results[i][0].transcript.toLowerCase().trim();
         p.textContent = script;
+        console.log(script)
         if (acceptedColors.includes(script)) {
             document.body.style.backgroundColor = script;
         } else {
