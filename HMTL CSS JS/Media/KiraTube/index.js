@@ -7,8 +7,10 @@ const categoryTextList = document.querySelectorAll(".category-text")
 const searchMobile = document.querySelector(".search-icon-for-mobile")
 const searchContainer = document.querySelector(".search-container")
 const searchMic = document.querySelector(".search-mic")
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const content = document.querySelector(".content")
 
+
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const rec = new SpeechRecognition();
 rec.lang = 'en-US'; rec.continuous = false;
 
@@ -18,19 +20,40 @@ searchMobile.addEventListener("click", () => {
     searchMobile.style.display = "none"
 })
 
-function searchYouTube(query) {
-    // const apiKey = 'AIzaSyC-g_jLvjkXmL-h2VN1f5HI9T2_LMv2vRA';
-    const apiKey = 'AIzaSyApim72w3e5ekjscDfjENEArChyoZ-wI-M';
-    // const apiKey = "AIzaSyCHS3ONC4EqSHQD2QCzgXXxiwpachSIVjI";
-    // const apiKey = "AIzaSyANDrJD8Ixx2Luv2j0i5l6G5Yh-dCN9iL8";
-    const maxResults = 20;
-    const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=${maxResults}&videoEmbeddable=true`;
 
-    videoContainer.innerHTML = ""
+// API Keys
+const apiKey = 'AIzaSyC-g_jLvjkXmL-h2VN1f5HI9T2_LMv2vRA';
+// const apiKey = 'AIzaSyApim72w3e5ekjscDfjENEArChyoZ-wI-M';
+// const apiKey = "AIzaSyCHS3ONC4EqSHQD2QCzgXXxiwpachSIVjI";
+// const apiKey = "AIzaSyANDrJD8Ixx2Luv2j0i5l6G5Yh-dCN9iL8";
 
+// 
+// get videos from API
+let searchQuery, nextPageToken;
+
+let scrollCount = 0, scrollable = 1200;
+
+content.addEventListener('scroll', function (e) {
+    if (content.scrollTop > scrollCount) {
+        scrollCount = this.scrollTop;
+        // console.log('Scrolled down. Scroll count: ', scrollCount);
+    }
+    if (scrollCount > scrollable) {
+        scrollable += 600;
+        console.log(scrollable)
+        getVideoDetails(searchQuery)
+    }
+});
+
+
+function getVideoDetails(query) {
+    const maxResults = 10;
+    const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=${maxResults}&pageToken=${nextPageToken || ''}`
     axios.get(apiUrl)
         .then(response => {
             const videos = response.data.items;
+            nextPageToken = response.data.nextPageToken;
+            console.log("Next ppppppppppp : " + nextPageToken)
             if (videos.length > 0) {
                 const videosList = videos.map(item => {
                     return {
@@ -111,6 +134,15 @@ function searchYouTube(query) {
         });
 }
 
+//  search video
+
+function searchYouTube(query) {
+    videoContainer.innerHTML = ""
+    searchQuery = query;
+    nextPageToken = "";
+    getVideoDetails(query)
+}
+
 function createVideoCards(videosList) {
     videosList.forEach(video => {
         const givenDateString = video.publishTime;
@@ -153,8 +185,18 @@ function createVideoCards(videosList) {
         videoContainer.appendChild(div);
     });
 
-    const videoCardElements = document.querySelectorAll('.video-card');
+    // For scroll top
+    function scrollToTop(parentContainer) {
+        // Use the scrollIntoView method with the behavior 'smooth'
+        parentContainer.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
 
+    // Create video player and play video
+
+    const videoCardElements = document.querySelectorAll('.video-card');
 
     const playerContainer = document.createElement("div");
     const videoPlayer = document.createElement("div");
@@ -162,6 +204,7 @@ function createVideoCards(videosList) {
 
     videoPlayer.setAttribute("id", "player");
     videoPlayer.style.borderRadius = "0.7rem"
+
 
     videoCardElements.forEach(video => {
         video.addEventListener('click', (e) => {
@@ -203,6 +246,9 @@ function createVideoCards(videosList) {
 
                 playerContainer.appendChild(PlayingVideoDetails)
             }
+            // Invoked function to scroll top of parentDiv
+            scrollToTop(videoContainer);
+
 
             if (videoContainer.firstElementChild.id !== "player-container") {
                 videoContainer.prepend(playerContainer);
@@ -218,8 +264,8 @@ function createVideoCards(videosList) {
                     scrollToTop()
                 }
                 // console.log("video change");
-
             }
+
         });
     });
 

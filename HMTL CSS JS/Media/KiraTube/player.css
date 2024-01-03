@@ -111,7 +111,6 @@
     #player {
         width: 110%;
         height: 90%;
-        padding-bottom: 0.5rem;
     }
 
     .video-player-info> :first-child>button {
@@ -127,8 +126,7 @@
 
     #player {
         width: 118%;
-        height: 90%;
-        padding-bottom: 0.5rem;
+        height: 100%;
     }
 
     .video-player-info> :last-child>button {
@@ -155,5 +153,9 @@
     #player-container {
         grid-area: 1/1/3/4;
         height: 40rem;
+    }
+
+    #player {
+        height: 85%;
     }
 }
