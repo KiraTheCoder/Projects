@@ -8,8 +8,8 @@ const searchMobile = document.querySelector(".search-icon-for-mobile")
 const searchContainer = document.querySelector(".search-container")
 const searchMic = document.querySelector(".search-mic")
 const content = document.querySelector(".content")
-
-
+const loaderContainer = document.querySelector(".loader-container")
+const micContainer = document.querySelector(".mic-container")
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const rec = new SpeechRecognition();
 rec.lang = 'en-US'; rec.continuous = false;
@@ -20,12 +20,31 @@ searchMobile.addEventListener("click", () => {
     searchMobile.style.display = "none"
 })
 
+function loader() {
+    loaderContainer.style.display = "flex"
+}
+function unLoader() {
+    loaderContainer.style.display = "none"
+}
 
+function micShow() {
+    micContainer.style.display = "flex"
+}
+function micHide() {
+    micContainer.style.display = "none"
+}
+
+micContainer.addEventListener("click", () => {
+    micHide()
+})
+
+// - ---------------------------------------------------------------
 // API Keys
-const apiKey = 'AIzaSyC-g_jLvjkXmL-h2VN1f5HI9T2_LMv2vRA';
+
+// const apiKey = 'AIzaSyC-g_jLvjkXmL-h2VN1f5HI9T2_LMv2vRA';
 // const apiKey = 'AIzaSyApim72w3e5ekjscDfjENEArChyoZ-wI-M';
 // const apiKey = "AIzaSyCHS3ONC4EqSHQD2QCzgXXxiwpachSIVjI";
-// const apiKey = "AIzaSyANDrJD8Ixx2Luv2j0i5l6G5Yh-dCN9iL8";
+const apiKey = "AIzaSyANDrJD8Ixx2Luv2j0i5l6G5Yh-dCN9iL8";
 
 // 
 // get videos from API
@@ -47,6 +66,7 @@ content.addEventListener('scroll', function (e) {
 
 
 function getVideoDetails(query) {
+    loader()
     const maxResults = 10;
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&part=snippet&type=video&q=${query}&maxResults=${maxResults}&pageToken=${nextPageToken || ''}`
     axios.get(apiUrl)
@@ -128,6 +148,7 @@ function getVideoDetails(query) {
                         createVideoCards(videosList);
                     });
             }
+            unLoader()
         })
         .catch(error => {
             console.error('Error fetching videos:', error);
@@ -240,8 +261,7 @@ function createVideoCards(videosList) {
                             <span>${video.lastElementChild.children[1].children[2].children[1].innerText} </span>
                             <span>${video.lastElementChild.children[1].children[2].children[2].innerText} </span>
                         </p>
-                    </div> 
-
+                    </div>
                 ` ;
 
                 playerContainer.appendChild(PlayingVideoDetails)
@@ -252,10 +272,10 @@ function createVideoCards(videosList) {
 
             if (videoContainer.firstElementChild.id !== "player-container") {
                 videoContainer.prepend(playerContainer);
-                player(video.id, videoPlayer)
                 addVideoDetails()
-                // console.log("Player initiated");
+                player(video.id, videoPlayer)
                 scrollToTop()
+                // console.log("Player initiated");
             } else {
                 player(video.id, videoPlayer)
                 if (playerContainer.lastElementChild.id == "playing-video-details") {
@@ -308,6 +328,7 @@ function createVideoCards(videosList) {
 
     // Mic
     rec.onresult = function (e) {
+        micHide()
         for (let i = e.resultIndex; i < e.results.length; i++) {
             const script = e.results[i][0].transcript.toLowerCase().trim();
             // console.log(script)
@@ -317,8 +338,8 @@ function createVideoCards(videosList) {
     };
 
     searchMic.addEventListener("click", () => {
+        micShow()
         rec.start();
-
     })
 }
 

@@ -1,7 +1,9 @@
+
 let videoPlayer;
 let isYouTubeAPIReady = false;
 
 function createPlayer(videoId, playerContainer) {
+    // loader()
     // Check if the YouTube API is ready
     if (isYouTubeAPIReady) {
         initializePlayer();
@@ -59,6 +61,7 @@ function createPlayer(videoId, playerContainer) {
             console.log('Video has ended');
         }
     }
+    // unLoader()
 }
 
 export default createPlayer;

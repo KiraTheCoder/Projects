@@ -90,6 +90,57 @@ span {
   display: none;
 }
 
+/* Loader  */
+.loader-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 5;
+}
+
+.loader {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: 12px solid red;
+  border-bottom: 12px solid transparent;
+  animation: load 1s linear infinite;
+}
+
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mic-container {
+  position: absolute;
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  padding: 1rem 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  z-index: 5;
+}
+
+.mic-gif {
+  border-radius: 5rem;
+  height: 12rem;
+  height: 8rem;
+  box-shadow: 2px 3px 5px red;
+}
 
 /* Main Container */
 /* ==================================================== */
@@ -468,10 +519,10 @@ sup {
 
 }
 
-@media (min-width: 800px) and (max-width:96px) {
+@media (min-width: 800px) and (max-width:960px) {
 
   .search-container {
-    width: 10rem;
+    width: 16rem;
   }
 
 }
@@ -479,7 +530,7 @@ sup {
 @media (min-width: 651px) and (max-width:800px) {
 
   .search-container {
-    width: 10rem;
+    width: 9rem;
   }
 
 }
@@ -499,6 +550,10 @@ sup {
   /* ================ Header  ================*/
   .header-flex {
     gap: 0;
+  }
+
+  .youtube-text {
+    display: none;
   }
 
   .search-container {
@@ -598,6 +653,11 @@ sup {
   .video-title {
     font-size: 1.23rem;
   }
+
+  /* mic */
+  .mic-gif {
+    height: 7rem;
+  }
 }
 
 @media (max-width:524px) {
@@ -672,9 +732,28 @@ sup {
   .profile-upload-container {
     margin-right: -4rem;
   }
+
+
 }
 
 @media (max-width:480px) {
+
+  /* Loader */
+
+  .loader {
+    height: 80px;
+    width: 80px;
+    border: 10px solid red;
+    border-bottom: 10px solid black;
+  }
+
+  /* mic */
+
+  .mic-gif {
+    height: 5rem;
+  }
+
+  /*  */
   .header> :first-child {
     margin-left: -1.2rem;
   }
