@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root {
+            --clock-bg: rgb(0, 255, 255);
+            --clock-pins: goldenrod;
+            --clock-hide-pin: transparent;
+            --number-distance: 40%;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: black;
+        }
+
+        .clock {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 12rem;
+            height: 12rem;
+            border-radius: 100%;
+            position: relative;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0.8px 0.8px 1px var(--clock-pins);
+            box-shadow: 3px 4px 4px -3px aqua;
+            border: 0.01px dashed chocolate;
+        }
+
+        .clock-body {
+            border-radius: 100%;
+            width: 10rem;
+            height: 10rem;
+            position: relative;
+        }
+
+        .clock-body>div {
+            display: flex;
+            height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .clock-body> :first-child {
+            justify-content: center;
+            align-items: center;
+            height: 0.35rem;
+            width: 0.35rem;
+            z-index: 5;
+            background-color: var(--clock-pins);
+            border-radius: 100%;
+        }
+
+        .clock-hr {
+            width: 2.8px;
+            background: linear-gradient(to bottom, var(--clock-pins) 50%, var(--clock-hide-pin) 50%);
+        }
+
+        .clock-min {
+            width: 1.5px;
+            background: linear-gradient(to bottom, var(--clock-pins) 50%, var(--clock-hide-pin) 50%);
+
+        }
+
+        .clock-sec {
+            width: 0.5px;
+            background: linear-gradient(to bottom, var(--clock-pins) 50%, var(--clock-hide-pin) 50%);
+        }
+
+        /* ================= */
+
+        .clock-number {
+            height: 100%;
+            display: flex;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            /* background-color: #fff; */
+        }
+
+        .L1 {
+            transform: rotate(30deg);
+
+        }
+
+        .L2 {
+            transform: rotate(60deg);
+        }
+
+        .L3 {
+            transform: rotate(90deg);
+        }
+
+        .L4 {
+            transform: rotate(120deg);
+        }
+
+        .L5 {
+            transform: rotate(150deg);
+        }
+
+        .L6 {
+            transform: rotate(180deg);
+        }
+
+        .L7 {
+            transform: rotate(210deg);
+        }
+
+        .L8 {
+            transform: rotate(240deg);
+        }
+
+        .L9 {
+            transform: rotate(270deg);
+        }
+
+        .L10 {
+            transform: rotate(300deg);
+        }
+
+        .L11 {
+            transform: rotate(330deg);
+        }
+
+        .L12 {
+            transform: rotate(0deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="clock-number">
+            <div class="L1">1</div>
+        </div>
+        <div class="clock-number">
+            <div class="L2">2</div>
+        </div>
+        <div class="clock-number">
+            <div class="L3">3</div>
+        </div>
+        <div class="clock-number">
+            <div class="L4">4</div>
+        </div>
+        <div class="clock-number">
+            <div class="L5">5</div>
+        </div>
+        <div class="clock-number">
+            <div class="L6">6</div>
+        </div>
+        <div class="clock-number">
+            <div class="L7">7</div>
+        </div>
+        <div class="clock-number">
+            <div class="L8">8</div>
+        </div>
+        <div class="clock-number">
+            <div class="L9">9</div>
+        </div>
+        <div class="clock-number">
+            <div class="L10">10</div>
+        </div>
+        <div class="clock-number">
+            <div class="L11">11</div>
+        </div>
+        <div class="clock-number">
+            <div class="L12">12</div>
+        </div>
+
+        <div class="clock-body">
+            <div>
+
+            </div>
+            <!-- =========================== -->
+            <div>
+                <div class="clock-hr"></div>
+            </div>
+
+            <div>
+                <div class="clock-min"></div>
+            </div>
+
+            <div>
+                <div class="clock-sec"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const hrNode = document.querySelector(".clock-hr")
+        const minNode = document.querySelector(".clock-min")
+        const secNode = document.querySelector(".clock-sec")
+
+
+        function setTime() {
+            const date = new Date()
+            const time = date.toLocaleTimeString().split(":");
+
+            //===================== 
+            let sec = Number(time[2])
+            let min = Number(time[1])
+            let hr = Number(time[0])
+            if (hr > 12) {
+                hr = hr % 12
+            }
+
+            hr = parseInt((hr + min / 60) * 5)
+
+            //===================== 
+            secNode.style.transform = `rotate(${sec * 6}deg)`;
+            minNode.style.transform = `rotate(${min * 6}deg)`;
+            hrNode.style.transform = `rotate(${hr * 6}deg)`;
+
+            // console.log(hr, min, sec);
+        }
+
+        setInterval(setTime, 1000)
+
+    </script>
+</body>
+
+</html>

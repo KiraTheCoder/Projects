@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .draggable {
+            position: absolute;
+            cursor: grab;
+            /* Add any other styles you need */
+        }
+    </style>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Draggable Element</title>
+    </head>
+
+    <body>
+
+        <div id="draggableElement" class="draggable">
+            <!-- Your content goes here -->
+            Drag me!
+        </div>
+
+        <script>
+            const draggableElement = document.getElementById("draggableElement");
+
+            let offsetX, offsetY, isDragging = false;
+
+            draggableElement.addEventListener("mousedown", (e) => {
+                isDragging = true;
+
+                // Calculate the offset of the mouse click relative to the top-left corner of the element
+                offsetX = e.clientX - draggableElement.getBoundingClientRect().left;
+                offsetY = e.clientY - draggableElement.getBoundingClientRect().top;
+
+                // Change cursor style while dragging
+                draggableElement.style.cursor = "grabbing";
+
+                // Prevent text selection during drag
+                document.body.style.userSelect = "none";
+            });
+
+            document.addEventListener("mousemove", function (event) {
+                if (isDragging) {
+                    // Calculate the new position based on mouse movement
+                    const x = event.cl ientX - offsetX;
+                    const y = event.clientY - offsetY;
+
+                    // Apply the new position to the element
+                    draggableElement.style.left = x + "px";
+                    draggableElement.style.top = y + "px";
+                }
+            });
+
+            document.addEventListener("mouseup", function () {
+                if (isDragging) {
+                    // Reset variables and styles when dragging is finished
+                    isDragging = false;
+                    draggableElement.style.cursor = "grab";
+                    document.body.style.userSelect = "auto";
+                }
+            });
+
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>

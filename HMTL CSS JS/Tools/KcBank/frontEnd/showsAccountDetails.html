@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BK bank</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="UtilsFunction.js" type="module"></script>
+    <script defer src="showsAccountDetails.js" type="module"></script>
+    <script defer src="commanScript.js" type="module"></script>
+
+    <style>
+        .box {
+            height: 25rem;
+            width: 21rem;
+            color: black;
+            font-weight: 800;
+            font-size: 1.4rem;
+        }
+
+        #account-details {
+            padding: 0 0.5rem;
+        }
+
+        @media (min-width: 1000px) {
+            .box {
+                height: 30rem;
+                width: 25rem;
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="loader-container">
+        <div class="loader">
+        </div>
+    </div>
+    <div class="navbar">
+        <div class="nav-list">
+            <div class="logo-container">
+                <a href="./userOptions.html">
+                    <img class="logo scale" src="../assets/spidy.png" alt="">
+                </a>
+                <div class="app-name scale">KC bank</div>
+            </div>
+            <div class="products scale hide-show">Products
+            </div>
+
+            <a class=" scale hide-show">Bank Profile</a>
+            <a class=" scale hide-show">Career</a>
+            <a class=" scale hide-show">Contact Us</a>
+        </div>
+
+        <div class="logout-btn-container scale" id="logout">
+            Log out
+        </div>
+    </div>
+
+
+
+    <!-- <div class="separator"></div> -->
+
+    <div class="container">
+        <div class="login-container">
+            <div class="box">
+
+            </div>
+        </div>
+        <div class="counter">
+            <div>
+                <img src="../assets/happy-customer.png" alt="">
+                <p class="counterP">1782767</p>
+                <p>Customers</p>
+            </div>
+            <div>
+                <img src="../assets/atm.png" alt="">
+                <p class="counterP">872434</p>
+                <p>ATM</p>
+            </div>
+            <div>
+                <img src="../assets/branch.png" alt="">
+                <p class="counterP">872344</p>
+                <p>Branches</p>
+            </div>
+            <div>
+                <img src="../assets/bna.png" alt="">
+                <p class="counterP">176269</p>
+                <p>BNA</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="side-link">
+        <a>
+            <img src="../assets/play-store.png" alt="">
+            <p>Play Store</p>
+        </a>
+        <a>
+            <img src="../assets/app-store.png" alt="">
+            <p>App Store</p>
+        </a>
+        <a>
+            <img src="../assets/linkedin.png" alt="">
+            <p>Linkedin</p>
+        </a>
+        <a>
+            <img src="../assets/twitterx.svg" alt="">
+            <p>X twitter</p>
+        </a>
+        <a>
+            <img src="../assets/whatsapp.svg" alt="">
+            <p>WhatsApp</p>
+        </a>
+        <a>
+            <img src="../assets/youtube.svg" alt="">
+            <p>YouTube</p>
+        </a>
+        <a>
+            <img src="../assets/instagram.png" alt="">
+            <p>Instagram</p>
+        </a>
+        <a>
+            <img src="../assets/facebook.svg" alt="">
+            <p>FaceBook</p>
+        </a>
+
+    </div>
+
+    <!-- <div class="bank-profile"> -->
+    <div class="bank-profile-container">
+
+        <div class="bank-profile">
+            <div><img src="../assets/about-us.webp" alt=""></div>
+            <div>
+                <h5>Bank Profile</h5>
+                <strong>A saga of vision and enterprise</strong>
+                <p>It has been a long and eventful journey of more than a century, Bank of KC in India The parent Bank
+                    has
+                    International presence in 94 overseas offices spanning 17 countries. Starting in 1908 from a small
+                    building in KC to
+                    its new hi-rise and hi-tech KC Corporate Centre in Mumbai, is a saga of vision, enterprise,
+                    financial
+                    prudence and
+                    corporate governance. It is a story scripted in corporate wisdom and social pride. It is a story
+                    crafted
+                    in private
+                    capital, princely patronage and state ownership. It is a story of ordinary bankers and their
+                    extraordinary contribution
+                    in the ascent of Bank of KC to the formidable heights of corporate glory.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- </div> -->
+
+    <div class="additional-details-container">
+        <div class="additional-details">
+            <div>
+                <img src="../assets/locate.svg" alt="">
+                <p>Branches & ATMs</p>
+            </div>
+            <div><img src="../assets/downlaod.svg" alt="">
+                <p>Download Forms</p>
+            </div>
+            <div><img src="../assets/headphone.svg" alt="">
+                <p>Get in Touch</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bot">
+        <img src="../assets/bot-btn.gif" alt="">
+    </div>
+    <div style="margin-bottom: 0.5rem;">
+        <center>
+            Copyright © 2024 Bank of KC. All rights reserved
+        </center>
+    </div>
+
+
+    <script>
+        const counterP = document.querySelectorAll(".counterP")
+        for (let i = 0; i < counterP.length; i++) {
+            let k = 0;
+            const val = counterP[i].innerHTML;
+            counterP[i].innerHTML = 0;
+
+            const interval = setInterval(countDisplay, 1)
+            function countDisplay() {
+                k += 1111
+                counterP[i].innerHTML = k;
+                if (k >= Number(val)) {
+                    clearInterval(interval)
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+CREATE SEQUENCE id
+START WITH 1027352618
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1               ;
+
+CREATE SEQUENCE no
+START WITH 106351927362
+INCREMENT BY 1
+NO MINVALUE
+NO MAXVALUE
+CACHE 1                 ;
+
+CREATE TABLE customers (
+customer_id BIGINT DEFAULT NEXTVAL('Id') primary key,
+account_no BIGINT DEFAULT NEXTVAL('no'),
+pass_code INT,
+first_name VARCHAR(30) NOT NULL,
+last_name VARCHAR(30),
+email VARCHAR(70) NOT NULL UNIQUE,
+phone_no bigint NOT NULL UNIQUE,
+address TEXT NOT NULL,
+account_type VARCHAR(20) NOT NULL,
+balance DECIMAL(15, 2) DEFAULT 0.00,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+Insert INTO
+customers(
+customer_id,
+account_no,
+first_name,
+last_name,
+email,
+phone_no,
+address,
+account_type,
+balance)
+VALUES
+(
+'145537',
+'12345678',
+'John',
+'shina',
+'example@gmail.com',
+'0987654321',
+'123 Main St',
+'saving',
+100000)
